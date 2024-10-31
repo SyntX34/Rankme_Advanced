@@ -9,7 +9,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	CreateNative("RankMe_GetHitbox", Native_GetHitbox);
 	CreateNative("RankMe_IsPlayerLoaded", Native_IsPlayerLoaded);
 	
-	RegPluginLibrary("rankme");
+	RegPluginLibrary("rankme_advanced");
 	
 	return APLRes_Success;
 }
