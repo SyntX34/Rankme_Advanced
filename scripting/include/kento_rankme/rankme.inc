@@ -7,27 +7,32 @@ enum struct WEAPONS_ENUM{
 	int KNIFE;
 	int GLOCK;
 	int HKP2000;
-	int USP_SILENCER;
+	int USP;
 	int P250;
+	int P228;
 	int DEAGLE;
 	int ELITE;
 	int FIVESEVEN;
 	int TEC9;
 	int CZ75A;
 	int REVOLVER;
-	int NOVA;
+	int M3;
 	int XM1014;
 	int MAG7;
 	int SAWEDOFF;
 	int BIZON;
+	int TMP;
 	int MAC10;
 	int MP9;
+	int MP5NAVY;
 	int MP7;
 	int UMP45;
 	int P90;
-	int GALILAR;
+	int GALIL;
 	int AK47;
 	int SCAR20;
+	int SCOUT;
+	int SG552;
 	int FAMAS;
 	int M4A1;
 	int M4A1_SILENCER;
@@ -35,6 +40,7 @@ enum struct WEAPONS_ENUM{
 	int SSG08;
 	int SG556;
 	int AWP;
+	int SG550;
 	int G3SG1;
 	int M249;
 	int NEGEV;
@@ -50,71 +56,82 @@ enum struct WEAPONS_ENUM{
 		data[0] = this.KNIFE;
 		data[1] = this.GLOCK;
 		data[2] = this.HKP2000;
-		data[3] = this.USP_SILENCER;
+		data[3] = this.USP;
 		data[4] = this.P250;
-		data[5] = this.DEAGLE;
-		data[6] = this.ELITE;
-		data[7] = this.FIVESEVEN;
-		data[8] = this.TEC9;
-		data[9] = this.CZ75A;
-		data[10] = this.REVOLVER;
-		data[11] = this.NOVA;
-		data[12] = this.XM1014;
-		data[13] = this.MAG7;
-		data[14] = this.SAWEDOFF;
-		data[15] = this.BIZON;
-		data[16] = this.MAC10;
-		data[17] = this.MP9;
-		data[18] = this.MP7;
-		data[19] = this.UMP45;
-		data[20] = this.P90;
-		data[21] = this.GALILAR;
-		data[22] = this.AK47;
-		data[23] = this.SCAR20;
-		data[24] = this.FAMAS;
-		data[25] = this.M4A1;
-		data[26] = this.M4A1_SILENCER;
-		data[27] = this.AUG;
-		data[28] = this.SSG08;
-		data[29] = this.SG556;
-		data[30] = this.AWP;
-		data[31] = this.G3SG1;
-		data[32] = this.M249;
-		data[33] = this.NEGEV;
-		data[34] = this.HEGRENADE;
-		data[35] = this.FLASHBANG;
-		data[36] = this.SMOKEGRENADE;
-		data[37] = this.INFERNO;
-		data[38] = this.DECOY;
-		data[39] = this.TASER;
-		data[40] = this.MP5SD;
-		data[41] = this.BREACHCHARGE;
+		data[5] = this.P228;
+		data[6] = this.DEAGLE;
+		data[7] = this.ELITE;
+		data[8] = this.FIVESEVEN;
+		data[9] = this.TEC9;
+		data[10] = this.CZ75A;
+		data[11] = this.REVOLVER;
+		data[12] = this.M3;
+		data[13] = this.XM1014;
+		data[14] = this.MAG7;
+		data[15] = this.SAWEDOFF;
+		data[16] = this.BIZON;
+		data[17] = this.TMP;
+		data[18] = this.MAC10;
+		data[19] = this.MP9;
+		data[20] = this.MP5NAVY;
+		data[21] = this.MP7;
+		data[22] = this.UMP45;
+		data[23] = this.P90;
+		data[24] = this.GALIL;
+		data[25] = this.AK47;
+		data[26] = this.SCAR20;
+		data[27] = this.SCOUT;
+		data[28] = this.SG552;
+		data[29] = this.FAMAS;
+		data[30] = this.M4A1;
+		data[31] = this.M4A1_SILENCER;
+		data[32] = this.AUG;
+		data[33] = this.SSG08;
+		data[34] = this.SG556;
+		data[35] = this.AWP;
+		data[36] = this.SG550;
+		data[37] = this.G3SG1;
+		data[38] = this.M249;
+		data[39] = this.NEGEV;
+		data[40] = this.HEGRENADE;
+		data[41] = this.FLASHBANG;
+		data[42] = this.SMOKEGRENADE;
+		data[43] = this.INFERNO;
+		data[44] = this.DECOY;
+		data[45] = this.TASER;
+		data[46] = this.MP5SD;
+		data[47] = this.BREACHCHARGE;
 	}
 	void Reset() {
 		this.KNIFE = 0;
 		this.GLOCK = 0;
 		this.HKP2000 = 0;
-		this.USP_SILENCER = 0;
+		this.USP = 0;
 		this.P250 = 0;
+		this.P228 = 0;
 		this.DEAGLE = 0;
 		this.ELITE = 0;
 		this.FIVESEVEN = 0;
 		this.TEC9 = 0;
 		this.CZ75A = 0;
 		this.REVOLVER = 0;
-		this.NOVA = 0;
+		this.M3 = 0;
 		this.XM1014 = 0;
 		this.MAG7 = 0;
 		this.SAWEDOFF = 0;
 		this.BIZON = 0;
+		this.TMP = 0;
 		this.MAC10 = 0;
 		this.MP9 = 0;
+		this.MP5NAVY = 0;
 		this.MP7 = 0;
 		this.UMP45 = 0;
 		this.P90 = 0;
-		this.GALILAR = 0;
+		this.GALIL = 0;
 		this.AK47 = 0;
 		this.SCAR20 = 0;
+		this.SCOUT = 0;
+		this.SG552 = 0;
 		this.FAMAS = 0;
 		this.M4A1 = 0;
 		this.M4A1_SILENCER = 0;
@@ -122,6 +139,7 @@ enum struct WEAPONS_ENUM{
 		this.SSG08 = 0;
 		this.SG556 = 0;
 		this.AWP = 0;
+		this.SG550 = 0;
 		this.G3SG1 = 0;
 		this.M249 = 0;
 		this.NEGEV = 0;
@@ -146,120 +164,138 @@ enum struct WEAPONS_ENUM{
 				this.HKP2000++;
 			}
 			case 3: {
-				this.USP_SILENCER++;
+				this.USP++;
 			}
 			case 4: {
 				this.P250++;
 			}
 			case 5: {
-				this.DEAGLE++;
+				this.P228++;
 			}
 			case 6: {
-				this.ELITE++;
+				this.DEAGLE++;
 			}
 			case 7: {
-				this.FIVESEVEN++;
+				this.ELITE++;
 			}
 			case 8: {
-				this.TEC9++;
+				this.FIVESEVEN++;
 			}
 			case 9: {
-				this.CZ75A++;
+				this.TEC9++;
 			}
 			case 10: {
-				this.REVOLVER++;
+				this.CZ75A++;
 			}
 			case 11: {
-				this.NOVA++;
+				this.REVOLVER++;
 			}
 			case 12: {
-				this.XM1014++;
+				this.M3++;
 			}
 			case 13: {
-				this.MAG7++;
+				this.XM1014++;
 			}
 			case 14: {
-				this.SAWEDOFF++;
+				this.MAG7++;
 			}
 			case 15: {
-				this.BIZON++;
+				this.SAWEDOFF++;
 			}
 			case 16: {
-				this.MAC10++;
+				this.BIZON++;
 			}
 			case 17: {
-				this.MP9++;
+				this.TMP++;
 			}
 			case 18: {
-				this.MP7++;
+				this.MAC10++;
 			}
 			case 19: {
-				this.UMP45++;
+				this.MP9++;
 			}
 			case 20: {
-				this.P90++;
+				this.MP5NAVY++;
 			}
 			case 21: {
-				this.GALILAR++;
+				this.MP7++;
 			}
 			case 22: {
-				this.AK47++;
+				this.UMP45++;
 			}
 			case 23: {
-				this.SCAR20++;
+				this.P90++;
 			}
 			case 24: {
-				this.FAMAS++;
+				this.GALIL++;
 			}
 			case 25: {
-				this.M4A1++;
+				this.AK47++;
 			}
 			case 26: {
-				this.M4A1_SILENCER++;
+				this.SCAR20++;
 			}
 			case 27: {
-				this.AUG++;
+				this.SCOUT++;
 			}
 			case 28: {
-				this.SSG08++;
+				this.SG552++;
 			}
 			case 29: {
-				this.SG556++;
+				this.FAMAS++;
 			}
 			case 30: {
-				this.AWP++;
+				this.M4A1++;
 			}
 			case 31: {
-				this.G3SG1++;
+				this.M4A1_SILENCER++;
 			}
 			case 32: {
-				this.M249++;
+				this.AUG++;
 			}
 			case 33: {
-				this.NEGEV++;
+				this.SSG08++;
 			}
 			case 34: {
-				this.HEGRENADE++;
+				this.SG556++;
 			}
 			case 35: {
-				this.FLASHBANG++;
+				this.AWP++;
 			}
 			case 36: {
-				this.SMOKEGRENADE++;
+				this.SG550++;
 			}
 			case 37: {
-				this.INFERNO++;
+				this.G3SG1++;
 			}
 			case 38: {
-				this.DECOY++;
+				this.M249++;
 			}
 			case 39: {
-				this.TASER++;
+				this.NEGEV++;
 			}
 			case 40: {
-				this.MP5SD++;
+				this.HEGRENADE++;
 			}
 			case 41: {
+				this.FLASHBANG++;
+			}
+			case 42: {
+				this.SMOKEGRENADE++;
+			}
+			case 43: {
+				this.INFERNO++;
+			}
+			case 44: {
+				this.DECOY++;
+			}
+			case 45: {
+				this.TASER++;
+			}
+			case 46: {
+				this.MP5SD++;
+			}
+			case 47: {
 				this.BREACHCHARGE++;
 			}
 		}
