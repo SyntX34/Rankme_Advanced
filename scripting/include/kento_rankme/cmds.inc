@@ -377,7 +377,7 @@ public void SQL_TopCallback(Handle owner, Handle hndl, const char[] error, any D
 			deaths=SQL_FetchInt(hndl,6);
 		
 		kdr = SQL_FetchFloat(hndl,5)/deaths;
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) - KDR: %.2f\n",i+at,name,SQL_FetchInt(hndl,4),kdr);
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) - Kills: %d, Deaths: %d, KDR: %.2f\n",i+at,name,SQL_FetchInt(hndl,5),SQL_FetchInt(hndl,6),SQL_FetchInt(hndl,4),kdr);
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
