@@ -335,71 +335,71 @@ void ShowTOP(int client, int at){
 }
 
 public void SQL_TopCallback(Handle owner, Handle hndl, const char[] error, any Datapack){
-	if(hndl == INVALID_HANDLE)
-	{
-		LogError("[RankMe] Query Fail: %s", error);
-		PrintToServer(error);
-		return;
-	}
-	
-	ResetPack(Datapack);
-	int i;
-	int client = ReadPackCell(Datapack);
-	if(client == 0 || !IsClientInGame(client))
-		return;
-	int at = ReadPackCell(Datapack);
-	CloseHandle(Datapack);
-	if(!SQL_HasResultSet(hndl) || SQL_GetRowCount(hndl) ==0){
-		ShowTOP(client,g_TotalPlayers-9);
-		return;
-	}
-	char name[256];
-	char temp[500];
-	
-	Menu menu = CreateMenuEx(GetMenuStyleHandle(MenuStyle_Radio),MenuHandler_Top);
-	
-	float kdr;
-	Format(temp,sizeof(temp)," %T\n","Showing",client,at+1,at+10,g_TotalPlayers);
-	menu.SetTitle("");
-	char sBuffer[200];
-	while(SQL_HasResultSet(hndl) && SQL_FetchRow(hndl))
-	{
-		
-		i++;
-		
-		SQL_FetchString(hndl,2,name,sizeof(name));
-			
-		
-		int deaths;
-		if(SQL_FetchInt(hndl,6) == 0)
-			deaths = 1;
-		else 
-			deaths=SQL_FetchInt(hndl,6);
-		
-		kdr = SQL_FetchFloat(hndl,5)/deaths;
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) - Kills: %d, Deaths: %d, KDR: %.2f\n",i+at,name,SQL_FetchInt(hndl,5),SQL_FetchInt(hndl,6),SQL_FetchInt(hndl,4),kdr);
-		
-		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
-			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
-			sBuffer="\0";
-		}
-	} 
-	Format(temp,sizeof(temp),"%s\n",temp);
-	menu.AddItem(temp,temp);
-	
-	
-	IntToString(at+i,temp,sizeof(temp));
-	char temp1[20];
-	Format(temp1,sizeof(temp1),"%T","Next",client);
-	if(i>9)
-		menu.AddItem(temp,temp1);
-	IntToString(at-i,temp,sizeof(temp));
-	Format(temp1,sizeof(temp1),"%T","Back",client);
-	if(at+i-1 >9)
-		menu.AddItem(temp,temp1);
-	
-	menu.DisplayAt(client,at,MENU_TIME_FOREVER);
+    if(hndl == INVALID_HANDLE)
+    {
+        LogError("[RankMe] Query Fail: %s", error);
+        PrintToServer(error);
+        return;
+    }
+    
+    ResetPack(Datapack);
+    int client = ReadPackCell(Datapack);
+    if(client == 0 || !IsClientInGame(client))
+        return;
+
+    int at = ReadPackCell(Datapack);
+    CloseHandle(Datapack);
+    
+    if(!SQL_HasResultSet(hndl) || SQL_GetRowCount(hndl) == 0){
+        ShowTOP(client, g_TotalPlayers - 9);
+        return;
+    }
+
+    char name[256];
+    char temp[500];
+    Menu menu = CreateMenuEx(GetMenuStyleHandle(MenuStyle_Radio), MenuHandler_Top);
+    float kdr;
+    Format(temp, sizeof(temp), " %T\n", "Showing", client, at + 1, at + 5, g_TotalPlayers); // Show up to 5 players
+
+    char sBuffer[200];
+    int i = 0; // Initialize the counter here
+    while(SQL_HasResultSet(hndl) && SQL_FetchRow(hndl) && i < 5) // Limit to 5 players
+    {
+        i++;
+        SQL_FetchString(hndl, 2, name, sizeof(name));
+        
+        int deaths = SQL_FetchInt(hndl, 6);
+        if(deaths == 0)
+            deaths = 1; // Avoid division by zero
+
+        kdr = SQL_FetchFloat(hndl, 5) / deaths;
+        Format(sBuffer, sizeof(sBuffer), "%d - %s (%d) - Kills: %d, Deaths: %d, Headshots: %d, KDR: %.2f\n", 
+               i + at, name, SQL_FetchInt(hndl, 4), SQL_FetchInt(hndl, 5), 
+               deaths, SQL_FetchInt(hndl, 12), kdr);
+        
+        if(strlen(temp) + strlen(sBuffer) < MAX_LENGTH_MENU){
+            Format(temp, sizeof(temp), "%s%s", temp, sBuffer);
+            sBuffer[0] = '\0'; // Clear buffer
+        }
+    } 
+
+    Format(temp, sizeof(temp), "%s\n", temp);
+    menu.AddItem(temp, temp);
+    
+    // Only add next/back if applicable
+    IntToString(at + i, temp, sizeof(temp));
+    char temp1[20];
+    Format(temp1, sizeof(temp1), "%T", "Next", client);
+    if(i == 5) // Show next only if we have 5 players
+        menu.AddItem(temp, temp1);
+    IntToString(at - i, temp, sizeof(temp));
+    Format(temp1, sizeof(temp1), "%T", "Back", client);
+    if(at + i - 1 > 5) // Show back if we have more than 5 in the previous pages
+        menu.AddItem(temp, temp1);
+    
+    menu.DisplayAt(client, at, MENU_TIME_FOREVER);
 }
+
 
 public int MenuHandler_Top(Menu menu, MenuAction action, int param1, int param2){
 	
@@ -590,7 +590,7 @@ public void SQL_TopKillsCallback(Handle owner, Handle hndl, const char[] error, 
 	
 	Menu menu = CreateMenuEx(GetMenuStyleHandle(MenuStyle_Radio),MenuHandler_TopKills);
 	
-	Format(temp,sizeof(temp)," %T\n","Showing",client,at+1,at+10,g_TotalPlayers);
+	Format(temp,sizeof(temp)," %T\n","Showing",client,at+1,at+5,g_TotalPlayers);
 	menu.SetTitle("");
 	char sBuffer[200];
 	while(SQL_HasResultSet(hndl) && SQL_FetchRow(hndl))
