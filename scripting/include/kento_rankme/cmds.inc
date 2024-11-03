@@ -162,7 +162,7 @@ public Action CMD_TopWeapon(int client, int args){
 	} else {
 		Menu menu = CreateMenu(MenuHandler_TopWeapon_Choose);
 		menu.SetTitle("Top Weapon:");
-		for(int i=0;i<42;i++){
+		for(int i=0;i<51;i++){
 			menu.AddItem(g_sWeaponsNamesGame[i],g_sWeaponsNamesFull[i]);
 		}
 		menu.Display(client,MENU_TIME_FOREVER);
@@ -1489,7 +1489,7 @@ public void SQL_StatsMe2Callback(Handle owner, Handle hndl, const char[] error, 
 		rounds = 1;
 	}
 
-	int idamage = SQL_FetchInt(hndl,76);
+	int idamage = SQL_FetchInt(hndl,85);
 	float damage = IntToFloat(idamage);
 	
 	int hits = SQL_FetchInt(hndl,11);
@@ -1509,22 +1509,22 @@ public void SQL_StatsMe2Callback(Handle owner, Handle hndl, const char[] error, 
 	StrCat(text,sizeof(text),temp);
 	Format(temp,sizeof(temp),"%T: %d   %T: %.2f   %T: %.2f\n","Damage", client, idamage,"KPR", client, kills/rounds, "DPR", client, damage/rounds);
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d  \n","First Bloods", client, SQL_FetchInt(hndl, 80));
+	Format(temp,sizeof(temp),"%T: %d  \n","First Bloods", client, SQL_FetchInt(hndl, 89));
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d  %T: %d\n","Thru Smokes", client, SQL_FetchInt(hndl, 83), "Flashed Kills", client, SQL_FetchInt(hndl, 84));
+	Format(temp,sizeof(temp),"%T: %d  %T: %d\n","Thru Smokes", client, SQL_FetchInt(hndl, 91), "Flashed Kills", client, SQL_FetchInt(hndl, 92));
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d\n","AssistFlashes", client, SQL_FetchInt(hndl, 85));
+	Format(temp,sizeof(temp),"%T: %d\n","AssistFlashes", client, SQL_FetchInt(hndl, 94));
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d\n","AssistTeamFlashes", client, SQL_FetchInt(hndl, 86));
+	Format(temp,sizeof(temp),"%T: %d\n","AssistTeamFlashes", client, SQL_FetchInt(hndl, 95));
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d\n","Wallbangs", client, SQL_FetchInt(hndl, 88));
+	Format(temp,sizeof(temp),"%T: %d\n","Wallbangs", client, SQL_FetchInt(hndl, 97));
 	StrCat(text,sizeof(text),temp);
 	panel.AddItem("",text);
 	text="";
 
 	Format(temp,sizeof(temp),"- %T\n","RoundStats",client);
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d/%d   %T: %d/%d   %T: %d\n%T: %d   %T: %d   %T: %d\n","TRWins",client,SQL_FetchInt(hndl,70),SQL_FetchInt(hndl,14),"CTWins",client,SQL_FetchInt(hndl,69),SQL_FetchInt(hndl,15),"MVPs",client,SQL_FetchInt(hndl,75), "MatchWins", client, SQL_FetchInt(hndl, 77), "MatchDraws", client, SQL_FetchInt(hndl, 78), "MatchLosses", client, SQL_FetchInt(hndl, 79));
+	Format(temp,sizeof(temp),"%T: %d/%d   %T: %d/%d   %T: %d\n%T: %d   %T: %d   %T: %d\n","TRWins",client,SQL_FetchInt(hndl,79),SQL_FetchInt(hndl,14),"CTWins",client,SQL_FetchInt(hndl,78),SQL_FetchInt(hndl,15),"MVPs",client,SQL_FetchInt(hndl,84), "MatchWins", client, SQL_FetchInt(hndl, 86), "MatchDraws", client, SQL_FetchInt(hndl, 87), "MatchLosses", client, SQL_FetchInt(hndl, 88));
 	StrCat(text,sizeof(text),temp);
 	panel.AddItem("",text);
 	text="";
@@ -1538,16 +1538,16 @@ public void SQL_StatsMe2Callback(Handle owner, Handle hndl, const char[] error, 
 	
 	Format(temp,sizeof(temp),"- %T\n","NoScopeStats",client);
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d   %T: %.2fm \n","NoScopes",client,SQL_FetchInt(hndl,81), "Farthest", client, IntToFloat(SQL_FetchInt(hndl,82))/100 );
+	Format(temp,sizeof(temp),"%T: %d   %T: %.2fm \n","NoScopes",client,SQL_FetchInt(hndl,90), "Farthest", client, IntToFloat(SQL_FetchInt(hndl,91))/100 );
 	StrCat(text,sizeof(text),temp);
 	panel.AddItem("",text);
 	text="";
 	
 	Format(temp,sizeof(temp),"- %T\n","BombHostagesStats",client);
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d   %T: %d   %T: %d\n","PlantedBombs",client,SQL_FetchInt(hndl,66),"ExplodedBombs",client,SQL_FetchInt(hndl,67),"DefusedBombs",client,SQL_FetchInt(hndl,68));
+	Format(temp,sizeof(temp),"%T: %d   %T: %d   %T: %d\n","PlantedBombs",client,SQL_FetchInt(hndl,75),"ExplodedBombs",client,SQL_FetchInt(hndl,76),"DefusedBombs",client,SQL_FetchInt(hndl,77));
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d\n","RescuedHostages",client,SQL_FetchInt(hndl,71));
+	Format(temp,sizeof(temp),"%T: %d\n","RescuedHostages",client,SQL_FetchInt(hndl,80));
 	StrCat(text,sizeof(text),temp);
 	panel.AddItem("",text);
 	text="";
@@ -1555,7 +1555,7 @@ public void SQL_StatsMe2Callback(Handle owner, Handle hndl, const char[] error, 
 	if(g_bVipEnabled){
 		Format(temp,sizeof(temp),"- %T\n","VIPStats",client);
 		StrCat(text,sizeof(text),temp);
-		Format(temp,sizeof(temp),"%T: %d/%d   %T: %d\n","VIPEscapes",client,SQL_FetchInt(hndl,73),SQL_FetchInt(hndl,74),"VIPsKilled",client,SQL_FetchInt(hndl,72));
+		Format(temp,sizeof(temp),"%T: %d/%d   %T: %d\n","VIPEscapes",client,SQL_FetchInt(hndl,82),SQL_FetchInt(hndl,83),"VIPsKilled",client,SQL_FetchInt(hndl,81));
 		StrCat(text,sizeof(text),temp);
 		panel.AddItem("",text);
 		text="";
@@ -2423,7 +2423,7 @@ public void SQL_TopMVPCallback(Handle owner, Handle hndl, const char[] error, an
 			
 		
 	
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) - %t: %d\n",i+at,name,SQL_FetchInt(hndl,4),"MVPs",SQL_FetchInt(hndl,75));
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) - %t: %d\n",i+at,name,SQL_FetchInt(hndl,4),"MVPs",SQL_FetchInt(hndl,84));
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
@@ -2537,7 +2537,7 @@ public void SQL_TopDamageCallback(Handle owner, Handle hndl, const char[] error,
 			
 		
 	
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) - %t: %d\n",i+at,name,SQL_FetchInt(hndl,4),"Damage",SQL_FetchInt(hndl,74));
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) - %t: %d\n",i+at,name,SQL_FetchInt(hndl,4),"Damage",SQL_FetchInt(hndl,85));
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
@@ -2891,7 +2891,7 @@ public void SQL_TopFBCallback(Handle owner, Handle hndl, const char[] error, any
 		i++;
 		SQL_FetchString(hndl,2,name,sizeof(name));
 			
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,80));
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,89));
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
@@ -3000,7 +3000,7 @@ public void SQL_TopNSCallback(Handle owner, Handle hndl, const char[] error, any
 		i++;
 		SQL_FetchString(hndl,2,name,sizeof(name));
 			
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,81));
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,90));
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
@@ -3110,7 +3110,7 @@ public void SQL_TopNSDCallback(Handle owner, Handle hndl, const char[] error, an
 		SQL_FetchString(hndl,2,name,sizeof(name));
 
 			
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %.2fm\n",i+at,name,SQL_FetchInt(hndl,4), IntToFloat(SQL_FetchInt(hndl,82))/100);
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %.2fm\n",i+at,name,SQL_FetchInt(hndl,4), IntToFloat(SQL_FetchInt(hndl,91))/100);
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
@@ -3219,7 +3219,7 @@ public void SQL_TopBlindCallback(Handle owner, Handle hndl, const char[] error, 
 		i++;
 		SQL_FetchString(hndl,2,name,sizeof(name));
 			
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,84));
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,93));
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
@@ -3328,7 +3328,7 @@ public void SQL_TopSmokeCallback(Handle owner, Handle hndl, const char[] error, 
 		i++;
 		SQL_FetchString(hndl,2,name,sizeof(name));
 			
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,83));
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,92));
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
@@ -3437,7 +3437,7 @@ public void SQL_TopWallCallback(Handle owner, Handle hndl, const char[] error, a
 		i++;
 		SQL_FetchString(hndl,2,name,sizeof(name));
 			
-		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,88));
+		Format(sBuffer,sizeof(sBuffer),"%d - %s (%d) : %d\n",i+at,name,SQL_FetchInt(hndl,4),SQL_FetchInt(hndl,97));
 		
 		if(strlen(temp)+strlen(sBuffer) < MAX_LENGTH_MENU){
 			Format(temp,sizeof(temp),"%s%s",temp,sBuffer);
