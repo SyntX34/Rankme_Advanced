@@ -1,6 +1,6 @@
 #pragma semicolon  1
 
-#define PLUGIN_VERSION "3.4"
+#define PLUGIN_VERSION "3.3.1"
 
 #include <sourcemod> 
 #include <adminmenu>
@@ -19,14 +19,18 @@
 #define CT 3
 
 #define SENDER_WORLD 0
-#define MAX_LENGTH_MENU 470
+#define MAX_LENGTH_MENU 512
 
 static const char g_sSqliteCreate[] = "CREATE TABLE IF NOT EXISTS` % s`(id INTEGER PRIMARY KEY, steam VARCHAR(40)NOT NULL, name TEXT, lastip TEXT, score NUMERIC, kills NUMERIC, deaths NUMERIC, assists NUMERIC, suicides NUMERIC, tk NUMERIC, shots NUMERIC, hits NUMERIC, headshots NUMERIC, connected NUMERIC, rounds_tr NUMERIC, rounds_ct NUMERIC, lastconnect NUMERIC, knife NUMERIC, glock NUMERIC, hkp2000 NUMERIC, usp NUMERIC, p250 NUMERIC, p228 NUMERIC, deagle NUMERIC, elite NUMERIC, fiveseven NUMERIC, tec9 NUMERIC, cz75a NUMERIC, revolver NUMERIC, m3 NUMERIC, xm1014 NUMERIC, mag7 NUMERIC, sawedoff NUMERIC, bizon NUMERIC, tmp NUMERIC, mac10 NUMERIC, mp9 NUMERIC, mp5navy NUMERIC, mp7 NUMERIC, ump45 NUMERIC, p90 NUMERIC, galil NUMERIC, ak47 NUMERIC, scar20 NUMERIC, scout NUMERIC, sg552 NUMERIC, famas NUMERIC, m4a1 NUMERIC, m4a1_silencer NUMERIC, aug NUMERIC, ssg08 NUMERIC, sg556 NUMERIC, awp NUMERIC, sg550 NUMERIC, g3sg1 NUMERIC, m249 NUMERIC, negev NUMERIC, hegrenade NUMERIC, flashbang NUMERIC, smokegrenade NUMERIC, inferno NUMERIC, decoy NUMERIC, taser NUMERIC, mp5sd NUMERIC, breachcharge NUMERIC, head NUMERIC, chest NUMERIC, stomach NUMERIC, left_arm NUMERIC, right_arm NUMERIC, left_leg NUMERIC, right_leg NUMERIC, c4_planted NUMERIC, c4_exploded NUMERIC, c4_defused NUMERIC, ct_win NUMERIC, tr_win NUMERIC, hostages_rescued NUMERIC, vip_killed NUMERIC, vip_escaped NUMERIC, vip_played NUMERIC, mvp NUMERIC, damage NUMERIC, match_win NUMERIC, match_draw NUMERIC, match_lose NUMERIC, first_blood NUMERIC, no_scope NUMERIC, no_scope_dis NUMERIC, thru_smoke NUMERIC, blind NUMERIC, assist_flash NUMERIC, assist_team_flash NUMERIC, assist_team_kill NUMERIC, wallbang NUMERIC)";
 static const char g_sMysqlCreate[] = "CREATE TABLE IF NOT EXISTS `%s` (id INTEGER PRIMARY KEY, steam VARCHAR(40) NOT NULL, name TEXT, lastip TEXT, score NUMERIC, kills NUMERIC, deaths NUMERIC, assists NUMERIC, suicides NUMERIC, tk NUMERIC, shots NUMERIC, hits NUMERIC, headshots NUMERIC, connected NUMERIC, rounds_tr NUMERIC, rounds_ct NUMERIC, lastconnect NUMERIC,knife NUMERIC,glock NUMERIC,hkp2000 NUMERIC,usp NUMERIC,p250 NUMERIC,p228 NUMERIC,deagle NUMERIC,elite NUMERIC,fiveseven NUMERIC,tec9 NUMERIC,cz75a NUMERIC,revolver NUMERIC,m3 NUMERIC,xm1014 NUMERIC,mag7 NUMERIC,sawedoff NUMERIC,bizon NUMERIC,tmp NUMERIC,mac10 NUMERIC,mp9 NUMERIC,mp5navy NUMERIC,mp7 NUMERIC,ump45 NUMERIC,p90 NUMERIC,galil NUMERIC,ak47 NUMERIC,scar20 NUMERIC,scout NUMERIC,sg552 NUMERIC,famas NUMERIC,m4a1 NUMERIC,m4a1_silencer NUMERIC,aug NUMERIC,ssg08 NUMERIC,sg556 NUMERIC,awp NUMERIC,sg550 NUMERIC,g3sg1 NUMERIC,m249 NUMERIC,negev NUMERIC,hegrenade NUMERIC,flashbang NUMERIC,smokegrenade NUMERIC,inferno NUMERIC,decoy NUMERIC,taser NUMERIC,mp5sd NUMERIC,breachcharge NUMERIC,head NUMERIC, chest NUMERIC, stomach NUMERIC, left_arm NUMERIC, right_arm NUMERIC, left_leg NUMERIC, right_leg NUMERIC,c4_planted NUMERIC,c4_exploded NUMERIC,c4_defused NUMERIC,ct_win NUMERIC, tr_win NUMERIC, hostages_rescued NUMERIC, vip_killed NUMERIC, vip_escaped NUMERIC, vip_played NUMERIC, mvp NUMERIC, damage NUMERIC, match_win NUMERIC, match_draw NUMERIC, match_lose NUMERIC, first_blood NUMERIC, no_scope NUMERIC, no_scope_dis NUMERIC, thru_smoke NUMERIC, blind NUMERIC, assist_flash NUMERIC, assist_team_flash NUMERIC, assist_team_kill NUMERIC, wallbang NUMERIC) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-static const char g_sSqlInsert[] = "INSERT INTO `%s` VALUES (NULL,'%s','%s','%s','%d','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0');";
+static const char g_sSqlInsert[] = 
+"INSERT INTO `%s` VALUES (NULL, '%s', '%s', '%s', '%d', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
+
 
 /* SM1.9 Fix */
-static const char g_sSqlSave[] = "UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i',suicides='%i',tk='%i',shots='%i',hits='%i',headshots='%i', rounds_tr = '%i', rounds_ct = '%i',lastip='%s',name='%s'%s,head='%i',chest='%i', stomach='%i',left_arm='%i',right_arm='%i',left_leg='%i',right_leg='%i' WHERE steam = '%s';";
+static const char g_sSqlSave[] = 
+"UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i', suicides='%i', tk='%i', shots='%i', hits='%i', headshots='%i', rounds_tr = '%i', rounds_ct = '%i', lastip='%s', name='%s'%s, head='%i', chest='%i', stomach='%i', left_arm='%i', right_arm='%i', left_leg='%i', right_leg='%i' WHERE steam = '%s';";
+
 static const char g_sSqlSaveName[] = "UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i',suicides='%i',tk='%i',shots='%i',hits='%i',headshots='%i', rounds_tr = '%i', rounds_ct = '%i',lastip='%s',name='%s'%s,head='%i',chest='%i', stomach='%i',left_arm='%i',right_arm='%i',left_leg='%i',right_leg='%i' WHERE name = '%s';";
 static const char g_sSqlSaveIp[] = "UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i',suicides='%i',tk='%i',shots='%i',hits='%i',headshots='%i', rounds_tr = '%i', rounds_ct = '%i',lastip='%s',name='%s'%s,head='%i',chest='%i', stomach='%i',left_arm='%i',right_arm='%i',left_leg='%i',right_leg='%i' WHERE lastip = '%s';";
 static const char g_sSqlSave2[] = "UPDATE `%s` SET c4_planted='%i',c4_exploded='%i',c4_defused='%i',ct_win='%i',tr_win='%i', hostages_rescued='%i',vip_killed = '%d',vip_escaped = '%d',vip_played = '%d', mvp='%i', damage='%i', match_win='%i', match_draw='%i', match_lose='%i', first_blood='%i', no_scope='%i', no_scope_dis='%i', thru_smoke='%i', blind='%i', assist_flash='%i', assist_team_flash='%i', assist_team_kill='%i', wallbang='%i', lastconnect='%i', connected='%i' WHERE steam = '%s';";
@@ -75,9 +79,9 @@ bool hidechat[MAXPLAYERS+1];
 
 char MSG[64];
 
-#include <kento_rankme/cvars>
-#include <kento_rankme/natives>
-#include <kento_rankme/cmds>
+#include <rankme_advanced/cvars>
+#include <rankme_advanced/natives>
+#include <rankme_advanced/cmds>
 
 public Plugin myinfo =  {
 	name = "RankMe", 
@@ -154,10 +158,10 @@ public void OnPluginStart() {
 	RegConsoleCmd("sm_rankmechat", CMD_HideChat, "Disable rankme chat messages");
 
 	// LOAD RANKME.CFG
-	AutoExecConfig(true, "kento.rankme");
+	AutoExecConfig(true, "advanced.rankme");
 		
 	// LOAD TRANSLATIONS
-	LoadTranslations("kento.rankme.phrases");
+	LoadTranslations("advanced.rankme.phrases");
 	
 	//	Hook the say and say_team for chat triggers
 	AddCommandListener(OnSayText, "say");
@@ -197,9 +201,9 @@ public void DB_Connect(bool firstload) {
 		g_cvarSQLTable.GetString(g_sSQLTable, sizeof(g_sSQLTable));
 		char sError[256];
 		if (g_bMysql) {
-			g_hStatsDb = SQL_Connect("kento_rankme", false, sError, sizeof(sError));
+			g_hStatsDb = SQL_Connect("rankme_advanced", false, sError, sizeof(sError));
 		} else {
-			g_hStatsDb = SQLite_UseDatabase("kento_rankme", sError, sizeof(sError));
+			g_hStatsDb = SQLite_UseDatabase("rankme_advanced", sError, sizeof(sError));
 		}
 
 		if (g_hStatsDb == INVALID_HANDLE)
@@ -461,9 +465,9 @@ public void OnPluginEnd() {
 			//ReplaceString(name, sizeof(name), "'", "");
 			
 			char weapons_query[2000] = "";
-			int weapon_array[42];
+			int weapon_array[48];
 			g_aWeapons[client].GetData(weapon_array);
-			for (int i = 0; i < 42; i++) {
+			for (int i = 0; i < 48; i++) {
 				Format(weapons_query, sizeof(weapons_query), "%s,%s='%d'", weapons_query, g_sWeaponsNamesGame[i], weapon_array[i]);
 			}
 
@@ -537,7 +541,7 @@ public void OnPluginEnd() {
 
 public int GetWeaponNum(char[] weaponname) 
 {
-	for (int i = 0; i < 42; i++) {
+	for (int i = 0; i < 48; i++) {
 		if (StrEqual(weaponname, g_sWeaponsNamesGame[i]))
 			return i;
 	}
@@ -1105,7 +1109,7 @@ public Action EventPlayerDeath(Handle event, const char [] name, bool dontBroadc
 			g_aStats[attacker].SCORE += score_dif;
 			g_aSession[attacker].SCORE += score_dif;
 			int num = GetWeaponNum(weapon); 
-			if (num < 42) g_aWeapons[attacker].AddKill(num);
+			if (num < 48) g_aWeapons[attacker].AddKill(num);
 		}
 		
 		if (g_MinimalKills == 0 || (g_aStats[victim].KILLS >= g_MinimalKills && g_aStats[attacker].KILLS >= g_MinimalKills)) {
@@ -1390,9 +1394,9 @@ public void SalvarPlayer(int client) {
 	//ReplaceString(name, sizeof(name), "'", "");
 	
 	char weapons_query[2000] = "";
-	int weapon_array[42];
+	int weapon_array[48];
 	g_aWeapons[client].GetData(weapon_array);
-	for (int i = 0; i < 42; i++) {
+	for (int i = 0; i < 48; i++) {
 		Format(weapons_query, sizeof(weapons_query), "%s,%s='%d'", weapons_query, g_sWeaponsNamesGame[i], weapon_array[i]);
 	}
 	
