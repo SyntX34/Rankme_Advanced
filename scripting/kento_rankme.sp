@@ -79,9 +79,9 @@ bool hidechat[MAXPLAYERS+1];
 
 char MSG[64];
 
-#include <rankme_advanced/cvars>
-#include <rankme_advanced/natives>
-#include <rankme_advanced/cmds>
+#include <kento_rankme/cvars>
+#include <kento_rankme/natives>
+#include <kento_rankme/cmds>
 
 public Plugin myinfo =  {
 	name = "RankMe", 
@@ -158,10 +158,10 @@ public void OnPluginStart() {
 	RegConsoleCmd("sm_rankmechat", CMD_HideChat, "Disable rankme chat messages");
 
 	// LOAD RANKME.CFG
-	AutoExecConfig(true, "advanced.rankme");
+	AutoExecConfig(true, "kento.rankme");
 		
 	// LOAD TRANSLATIONS
-	LoadTranslations("advanced.rankme.phrases");
+	LoadTranslations("kento.rankme.phrases");
 	
 	//	Hook the say and say_team for chat triggers
 	AddCommandListener(OnSayText, "say");
@@ -201,9 +201,9 @@ public void DB_Connect(bool firstload) {
 		g_cvarSQLTable.GetString(g_sSQLTable, sizeof(g_sSQLTable));
 		char sError[256];
 		if (g_bMysql) {
-			g_hStatsDb = SQL_Connect("rankme_advanced", false, sError, sizeof(sError));
+			g_hStatsDb = SQL_Connect("rankme", false, sError, sizeof(sError));
 		} else {
-			g_hStatsDb = SQLite_UseDatabase("rankme_advanced", sError, sizeof(sError));
+			g_hStatsDb = SQLite_UseDatabase("rankme", sError, sizeof(sError));
 		}
 
 		if (g_hStatsDb == INVALID_HANDLE)
