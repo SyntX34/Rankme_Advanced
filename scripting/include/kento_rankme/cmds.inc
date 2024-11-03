@@ -1511,7 +1511,7 @@ public void SQL_StatsMe2Callback(Handle owner, Handle hndl, const char[] error, 
 	StrCat(text,sizeof(text),temp);
 	Format(temp,sizeof(temp),"%T: %d  \n","First Bloods", client, SQL_FetchInt(hndl, 89));
 	StrCat(text,sizeof(text),temp);
-	Format(temp,sizeof(temp),"%T: %d  %T: %d\n","Thru Smokes", client, SQL_FetchInt(hndl, 91), "Flashed Kills", client, SQL_FetchInt(hndl, 92));
+	Format(temp,sizeof(temp),"%T: %d  %T: %d\n","Thru Smokes", client, SQL_FetchInt(hndl, 92), "Flashed Kills", client, SQL_FetchInt(hndl, 93));
 	StrCat(text,sizeof(text),temp);
 	Format(temp,sizeof(temp),"%T: %d\n","AssistFlashes", client, SQL_FetchInt(hndl, 94));
 	StrCat(text,sizeof(text),temp);
