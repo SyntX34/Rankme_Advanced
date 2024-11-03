@@ -4,7 +4,7 @@
 
 #include <sourcemod> 
 #include <adminmenu>
-#include <multicolors>
+#include <kento_csgocolors>
 #include <geoip>
 #include <sdktools>
 #include <cstrike>
@@ -21,16 +21,12 @@
 #define SENDER_WORLD 0
 #define MAX_LENGTH_MENU 512
 
-static const char g_sSqliteCreate[] = "CREATE TABLE IF NOT EXISTS` % s`(id INTEGER PRIMARY KEY, steam VARCHAR(40)NOT NULL, name TEXT, lastip TEXT, score NUMERIC, kills NUMERIC, deaths NUMERIC, assists NUMERIC, suicides NUMERIC, tk NUMERIC, shots NUMERIC, hits NUMERIC, headshots NUMERIC, connected NUMERIC, rounds_tr NUMERIC, rounds_ct NUMERIC, lastconnect NUMERIC, knife NUMERIC, glock NUMERIC, hkp2000 NUMERIC, usp NUMERIC, p250 NUMERIC, p228 NUMERIC, deagle NUMERIC, elite NUMERIC, fiveseven NUMERIC, tec9 NUMERIC, cz75a NUMERIC, revolver NUMERIC, m3 NUMERIC, xm1014 NUMERIC, mag7 NUMERIC, sawedoff NUMERIC, bizon NUMERIC, tmp NUMERIC, mac10 NUMERIC, mp9 NUMERIC, mp5navy NUMERIC, mp7 NUMERIC, ump45 NUMERIC, p90 NUMERIC, galil NUMERIC, ak47 NUMERIC, scar20 NUMERIC, scout NUMERIC, sg552 NUMERIC, famas NUMERIC, m4a1 NUMERIC, m4a1_silencer NUMERIC, aug NUMERIC, ssg08 NUMERIC, sg556 NUMERIC, awp NUMERIC, sg550 NUMERIC, g3sg1 NUMERIC, m249 NUMERIC, negev NUMERIC, hegrenade NUMERIC, flashbang NUMERIC, smokegrenade NUMERIC, inferno NUMERIC, decoy NUMERIC, taser NUMERIC, mp5sd NUMERIC, breachcharge NUMERIC, head NUMERIC, chest NUMERIC, stomach NUMERIC, left_arm NUMERIC, right_arm NUMERIC, left_leg NUMERIC, right_leg NUMERIC, c4_planted NUMERIC, c4_exploded NUMERIC, c4_defused NUMERIC, ct_win NUMERIC, tr_win NUMERIC, hostages_rescued NUMERIC, vip_killed NUMERIC, vip_escaped NUMERIC, vip_played NUMERIC, mvp NUMERIC, damage NUMERIC, match_win NUMERIC, match_draw NUMERIC, match_lose NUMERIC, first_blood NUMERIC, no_scope NUMERIC, no_scope_dis NUMERIC, thru_smoke NUMERIC, blind NUMERIC, assist_flash NUMERIC, assist_team_flash NUMERIC, assist_team_kill NUMERIC, wallbang NUMERIC)";
-static const char g_sMysqlCreate[] = "CREATE TABLE IF NOT EXISTS `%s` (id INTEGER PRIMARY KEY, steam VARCHAR(40) NOT NULL, name TEXT, lastip TEXT, score NUMERIC, kills NUMERIC, deaths NUMERIC, assists NUMERIC, suicides NUMERIC, tk NUMERIC, shots NUMERIC, hits NUMERIC, headshots NUMERIC, connected NUMERIC, rounds_tr NUMERIC, rounds_ct NUMERIC, lastconnect NUMERIC,knife NUMERIC,glock NUMERIC,hkp2000 NUMERIC,usp NUMERIC,p250 NUMERIC,p228 NUMERIC,deagle NUMERIC,elite NUMERIC,fiveseven NUMERIC,tec9 NUMERIC,cz75a NUMERIC,revolver NUMERIC,m3 NUMERIC,xm1014 NUMERIC,mag7 NUMERIC,sawedoff NUMERIC,bizon NUMERIC,tmp NUMERIC,mac10 NUMERIC,mp9 NUMERIC,mp5navy NUMERIC,mp7 NUMERIC,ump45 NUMERIC,p90 NUMERIC,galil NUMERIC,ak47 NUMERIC,scar20 NUMERIC,scout NUMERIC,sg552 NUMERIC,famas NUMERIC,m4a1 NUMERIC,m4a1_silencer NUMERIC,aug NUMERIC,ssg08 NUMERIC,sg556 NUMERIC,awp NUMERIC,sg550 NUMERIC,g3sg1 NUMERIC,m249 NUMERIC,negev NUMERIC,hegrenade NUMERIC,flashbang NUMERIC,smokegrenade NUMERIC,inferno NUMERIC,decoy NUMERIC,taser NUMERIC,mp5sd NUMERIC,breachcharge NUMERIC,head NUMERIC, chest NUMERIC, stomach NUMERIC, left_arm NUMERIC, right_arm NUMERIC, left_leg NUMERIC, right_leg NUMERIC,c4_planted NUMERIC,c4_exploded NUMERIC,c4_defused NUMERIC,ct_win NUMERIC, tr_win NUMERIC, hostages_rescued NUMERIC, vip_killed NUMERIC, vip_escaped NUMERIC, vip_played NUMERIC, mvp NUMERIC, damage NUMERIC, match_win NUMERIC, match_draw NUMERIC, match_lose NUMERIC, first_blood NUMERIC, no_scope NUMERIC, no_scope_dis NUMERIC, thru_smoke NUMERIC, blind NUMERIC, assist_flash NUMERIC, assist_team_flash NUMERIC, assist_team_kill NUMERIC, wallbang NUMERIC) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
-static const char g_sSqlInsert[] = 
-"INSERT INTO `%s` VALUES (NULL, '%s', '%s', '%s', '%d', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');";
-
+static const char g_sSqliteCreate[] = "CREATE TABLE IF NOT EXISTS `%s` (id INTEGER PRIMARY KEY, steam VARCHAR(40) NOT NULL, name TEXT, lastip TEXT, score NUMERIC, kills NUMERIC, deaths NUMERIC, assists NUMERIC, suicides NUMERIC, tk NUMERIC, shots NUMERIC, hits NUMERIC, headshots NUMERIC, connected NUMERIC, rounds_tr NUMERIC, rounds_ct NUMERIC, lastconnect NUMERIC,knife NUMERIC,glock NUMERIC,hkp2000 NUMERIC,usp_silencer NUMERIC,p250 NUMERIC,deagle NUMERIC,elite NUMERIC,fiveseven NUMERIC,tec9 NUMERIC,cz75a NUMERIC,revolver NUMERIC,nova NUMERIC,xm1014 NUMERIC,mag7 NUMERIC,sawedoff NUMERIC,bizon NUMERIC,mac10 NUMERIC,mp9 NUMERIC,mp7 NUMERIC,ump45 NUMERIC,p90 NUMERIC,galilar NUMERIC,ak47 NUMERIC,scar20 NUMERIC,famas NUMERIC,m4a1 NUMERIC,m4a1_silencer NUMERIC,aug NUMERIC,ssg08 NUMERIC,sg556 NUMERIC,awp NUMERIC,g3sg1 NUMERIC,m249 NUMERIC,negev NUMERIC,hegrenade NUMERIC,flashbang NUMERIC,smokegrenade NUMERIC,inferno NUMERIC,decoy NUMERIC,taser NUMERIC,mp5sd NUMERIC,breachcharge NUMERIC,m3 NUMERIC,usp NUMERIC,p228 NUMERIC,galil NUMERIC,scout NUMERIC,sg552 NUMERIC,sg550 NUMERIC,mp5navy NUMERIC,tmp NUMERIC,head NUMERIC, chest NUMERIC, stomach NUMERIC, left_arm NUMERIC, right_arm NUMERIC, left_leg NUMERIC, right_leg NUMERIC,c4_planted NUMERIC,c4_exploded NUMERIC,c4_defused NUMERIC,ct_win NUMERIC, tr_win NUMERIC, hostages_rescued NUMERIC, vip_killed NUMERIC, vip_escaped NUMERIC, vip_played NUMERIC, mvp NUMERIC, damage NUMERIC, match_win NUMERIC, match_draw NUMERIC, match_lose NUMERIC, first_blood NUMERIC, no_scope NUMERIC, no_scope_dis NUMERIC, thru_smoke NUMERIC, blind NUMERIC, assist_flash NUMERIC, assist_team_flash NUMERIC, assist_team_kill NUMERIC, wallbang NUMERIC)";
+static const char g_sMysqlCreate[] = "CREATE TABLE IF NOT EXISTS `%s` (id INTEGER PRIMARY KEY, steam TEXT, name TEXT, lastip TEXT, score NUMERIC, kills NUMERIC, deaths NUMERIC, assists NUMERIC, suicides NUMERIC, tk NUMERIC, shots NUMERIC, hits NUMERIC, headshots NUMERIC, connected NUMERIC, rounds_tr NUMERIC, rounds_ct NUMERIC, lastconnect NUMERIC,knife NUMERIC,glock NUMERIC,hkp2000 NUMERIC,usp_silencer NUMERIC,p250 NUMERIC,deagle NUMERIC,elite NUMERIC,fiveseven NUMERIC,tec9 NUMERIC,cz75a NUMERIC,revolver NUMERIC,nova NUMERIC,xm1014 NUMERIC,mag7 NUMERIC,sawedoff NUMERIC,bizon NUMERIC,mac10 NUMERIC,mp9 NUMERIC,mp7 NUMERIC,ump45 NUMERIC,p90 NUMERIC,galilar NUMERIC,ak47 NUMERIC,scar20 NUMERIC,famas NUMERIC,m4a1 NUMERIC,m4a1_silencer NUMERIC,aug NUMERIC,ssg08 NUMERIC,sg556 NUMERIC,awp NUMERIC,g3sg1 NUMERIC,m249 NUMERIC,negev NUMERIC,hegrenade NUMERIC,flashbang NUMERIC,smokegrenade NUMERIC,inferno NUMERIC,decoy NUMERIC,taser NUMERIC,mp5sd NUMERIC,breachcharge NUMERIC,m3 NUMERIC,usp NUMERIC,p228 NUMERIC,galil NUMERIC,scout NUMERIC,sg552 NUMERIC,sg550 NUMERIC,mp5navy NUMERIC,tmp NUMERIC,head NUMERIC, chest NUMERIC, stomach NUMERIC, left_arm NUMERIC, right_arm NUMERIC, left_leg NUMERIC, right_leg NUMERIC,c4_planted NUMERIC,c4_exploded NUMERIC,c4_defused NUMERIC,ct_win NUMERIC, tr_win NUMERIC, hostages_rescued NUMERIC, vip_killed NUMERIC, vip_escaped NUMERIC, vip_played NUMERIC, mvp NUMERIC, damage NUMERIC, match_win NUMERIC, match_draw NUMERIC, match_lose NUMERIC, first_blood NUMERIC, no_scope NUMERIC, no_scope_dis NUMERIC, thru_smoke NUMERIC, blind NUMERIC, assist_flash NUMERIC, assist_team_flash NUMERIC, assist_team_kill NUMERIC, wallbang NUMERIC) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+static const char g_sSqlInsert[] = "INSERT INTO `%s` VALUES (NULL,'%s','%s','%s','%d','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0');";
 
 /* SM1.9 Fix */
-static const char g_sSqlSave[] = 
-"UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i', suicides='%i', tk='%i', shots='%i', hits='%i', headshots='%i', rounds_tr = '%i', rounds_ct = '%i', lastip='%s', name='%s'%s, head='%i', chest='%i', stomach='%i', left_arm='%i', right_arm='%i', left_leg='%i', right_leg='%i' WHERE steam = '%s';";
-
+static const char g_sSqlSave[] = "UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i',suicides='%i',tk='%i',shots='%i',hits='%i',headshots='%i', rounds_tr = '%i', rounds_ct = '%i',lastip='%s',name='%s'%s,head='%i',chest='%i', stomach='%i',left_arm='%i',right_arm='%i',left_leg='%i',right_leg='%i' WHERE steam = '%s';";
 static const char g_sSqlSaveName[] = "UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i',suicides='%i',tk='%i',shots='%i',hits='%i',headshots='%i', rounds_tr = '%i', rounds_ct = '%i',lastip='%s',name='%s'%s,head='%i',chest='%i', stomach='%i',left_arm='%i',right_arm='%i',left_leg='%i',right_leg='%i' WHERE name = '%s';";
 static const char g_sSqlSaveIp[] = "UPDATE `%s` SET score = '%i', kills = '%i', deaths='%i', assists='%i',suicides='%i',tk='%i',shots='%i',hits='%i',headshots='%i', rounds_tr = '%i', rounds_ct = '%i',lastip='%s',name='%s'%s,head='%i',chest='%i', stomach='%i',left_arm='%i',right_arm='%i',left_leg='%i',right_leg='%i' WHERE lastip = '%s';";
 static const char g_sSqlSave2[] = "UPDATE `%s` SET c4_planted='%i',c4_exploded='%i',c4_defused='%i',ct_win='%i',tr_win='%i', hostages_rescued='%i',vip_killed = '%d',vip_escaped = '%d',vip_played = '%d', mvp='%i', damage='%i', match_win='%i', match_draw='%i', match_lose='%i', first_blood='%i', no_scope='%i', no_scope_dis='%i', thru_smoke='%i', blind='%i', assist_flash='%i', assist_team_flash='%i', assist_team_kill='%i', wallbang='%i', lastconnect='%i', connected='%i' WHERE steam = '%s';";
@@ -46,8 +42,8 @@ static const char g_sSqlRemoveDuplicateIpSQLite[] = "delete from `%s` where `%s`
 static const char g_sSqlRemoveDuplicateMySQL[] = "delete from `%s` USING `%s`, `%s` as vtable WHERE (`%s`.id>vtable.id) AND (`%s`.steam=vtable.steam);";
 static const char g_sSqlRemoveDuplicateNameMySQL[] = "delete from `%s` USING `%s`, `%s` as vtable WHERE (`%s`.id>vtable.id) AND (`%s`.name=vtable.name);";
 static const char g_sSqlRemoveDuplicateIpMySQL[] = "delete from `%s` USING `%s`, `%s` as vtable WHERE (`%s`.id>vtable.id) AND (`%s`.ip=vtable.ip);";
-stock const char g_sWeaponsNamesGame[48][] =  { "knife", "glock", "hkp2000", "usp", "p250", "p228", "deagle", "elite", "fiveseven", "tec9", "cz75a", "revolver", "m3", "xm1014", "mag7", "sawedoff", "bizon", "tmp", "mac10", "mp9", "mp5navy", "mp7", "ump45", "p90", "galil", "ak47", "scar20", "scout", "sg552", "famas", "m4a1", "m4a1_silencer", "aug", "ssg08", "sg556", "sg550", "awp", "g3sg1", "m249", "negev", "hegrenade", "flashbang", "smokegrenade", "inferno", "decoy", "taser", "mp5sd", "breachcharge"};
-stock const char g_sWeaponsNamesFull[48][] =  { "Knife", "Glock 19", "P2000", "Heckler & Koch USP45 Tactical", "P250", "SIG-Sauer P228", "Desert Eagle", "Dual Elites", "Five-Seven", "Tec 9", "CZ75-Auto", "R8 Revolver", "Benelli M3 Super 90", "Benelli M4 Super 90", "Mag 7", "Sawed-off", "PP-Bizon", "Steyr TMP", "Ingram MAC-10", "MP9", "Heckler & Koch MP5N", "MP7", "Heckler & Koch UMP45", "Fabrique Nationale P90", "IMI Galil ARM", "AK-47", "SCAR-20", "Steyr Scout", "SIG SG 552", "FAMAS F1", "M4A4", "M4A1-S", "Steyr AUG A1", "SSG 08", "SG 553", "SIG SG 550 SR", "Accuracy International Arctic Warfare Super Magnum", "Heckler & Koch G3SG/1", "FN M249-E2 SAW", "Negev", "HE Grenade", "Flashbang", "Smoke Grenade", "Inferno", "Decoy", "Zeus x27", "MP5-SD", "Breach Charges"};
+stock const char g_sWeaponsNamesGame[51][] =  { "knife", "glock", "hkp2000", "usp_silencer", "p250", "deagle", "elite", "fiveseven", "tec9", "cz75a", "revolver", "nova", "xm1014", "mag7", "sawedoff", "bizon", "mac10", "mp9", "mp7", "ump45", "p90", "galilar", "ak47", "scar20", "famas", "m4a1", "m4a1_silencer", "aug", "ssg08", "sg556", "awp", "g3sg1", "m249", "negev", "hegrenade", "flashbang", "smokegrenade", "inferno", "decoy", "taser", "mp5sd", "breachcharge", "m3", "usp", "p228", "galil", "scout", "sg552", "sg550", "mp5navy", "tmp"};
+stock const char g_sWeaponsNamesFull[51][] =  { "Knife", "Glock", "P2000", "USP-S", "P250", "Desert Eagle", "Dual Berettas", "Five-Seven", "Tec 9", "CZ75-Auto", "R8 Revolver", "Nova", "XM1014", "Mag 7", "Sawed-off", "PP-Bizon", "MAC-10", "MP9", "MP7", "UMP45", "P90", "Galil AR", "AK-47", "SCAR-20", "Famas", "M4A4", "M4A1-S", "AUG", "SSG 08", "SG 553", "AWP", "G3SG1", "M249", "Negev", "HE Grenade", "Flashbang", "Smoke Grenade", "Inferno", "Decoy", "Zeus x27", "MP5-SD", "Breach Charges", "Benelli M3 Super 90", "Heckler & Koch USP45 Tactical", "SIG-Sauer P228", "IMI Galil ARM", "Steyr Scout", "SIG SG 552", "SIG SG 550 SR", "Heckler & Koch MP5N", "Steyr TMP"};
 
 char g_sSQLTable[200];
 Handle g_hStatsDb;
@@ -85,10 +81,10 @@ char MSG[64];
 
 public Plugin myinfo =  {
 	name = "RankMe", 
-	author = "lok1, Scooby, Kento, pracc, Kxnrl, CrazyHackGUT, +SyntX34", 
-	description = "Improved RankMe for CSS/CSGO/CS2", 
+	author = "lok1, Scooby, Kento, pracc, Kxnrl, CrazyHackGUT, +SyntX (Added support for CS:Source)", 
+	description = "Improved RankMe for CSS/CSGO", 
 	version = PLUGIN_VERSION, 
-	url = ""
+	url = "https://github.com/id/SyntX34" //https://github.com/rogeraabbccdd/Kento-Rankme
 };
 
 public void OnPluginStart() {
@@ -121,10 +117,7 @@ public void OnPluginStart() {
 	RegAdminCmd("sm_resetrank", CMD_ResetRank, ADMFLAG_ROOT, "RankMe: Resets the rank of a player");
 	RegAdminCmd("sm_rankme_remove_duplicate", CMD_Duplicate, ADMFLAG_ROOT, "RankMe: Removes the duplicated rows on the database");
 	RegAdminCmd("sm_rankpurge", CMD_Purge, ADMFLAG_ROOT, "RankMe: Purges from the rank players that didn't connected for X days");
-	RegAdminCmd("sm_resetallrank", CMD_ResetRankAll, ADMFLAG_ROOT, "RankMe: Resets the rank of all players");
-	RegAdminCmd("sm_restartrank", CMD_ResetRankAll, ADMFLAG_ROOT, "RankMe: Resets the rank of all players");
-	RegAdminCmd("sm_eraserank", CMD_ResetRankAll, ADMFLAG_ROOT, "RankMe: Resets the rank of all players");
-	RegAdminCmd("sm_wiperank", CMD_ResetRankAll, ADMFLAG_ROOT, "RankMe: Resets the rank of all players");
+	RegAdminCmd("sm_resetrank_all", CMD_ResetRankAll, ADMFLAG_ROOT, "RankMe: Resets the rank of all players");
 	
 	// PLAYER COMMANDS
 	RegConsoleCmd("sm_session", CMD_Session, "RankMe: Shows the stats of your current session");
@@ -465,9 +458,9 @@ public void OnPluginEnd() {
 			//ReplaceString(name, sizeof(name), "'", "");
 			
 			char weapons_query[2000] = "";
-			int weapon_array[48];
+			int weapon_array[51];
 			g_aWeapons[client].GetData(weapon_array);
-			for (int i = 0; i < 48; i++) {
+			for (int i = 0; i < 51; i++) {
 				Format(weapons_query, sizeof(weapons_query), "%s,%s='%d'", weapons_query, g_sWeaponsNamesGame[i], weapon_array[i]);
 			}
 
@@ -541,7 +534,7 @@ public void OnPluginEnd() {
 
 public int GetWeaponNum(char[] weaponname) 
 {
-	for (int i = 0; i < 48; i++) {
+	for (int i = 0; i < 51; i++) {
 		if (StrEqual(weaponname, g_sWeaponsNamesGame[i]))
 			return i;
 	}
@@ -1109,7 +1102,7 @@ public Action EventPlayerDeath(Handle event, const char [] name, bool dontBroadc
 			g_aStats[attacker].SCORE += score_dif;
 			g_aSession[attacker].SCORE += score_dif;
 			int num = GetWeaponNum(weapon); 
-			if (num < 48) g_aWeapons[attacker].AddKill(num);
+			if (num < 51) g_aWeapons[attacker].AddKill(num);
 		}
 		
 		if (g_MinimalKills == 0 || (g_aStats[victim].KILLS >= g_MinimalKills && g_aStats[attacker].KILLS >= g_MinimalKills)) {
@@ -1199,7 +1192,7 @@ public Action EventPlayerDeath(Handle event, const char [] name, bool dontBroadc
 		}
 		
 		/* No scope */
-		if( attacker < MAXPLAYERS && ((StrContains(weapon, "awp") != -1 || StrContains(weapon, "ssg08") != -1) || (g_bNSAllSnipers && (StrContains(weapon, "g3sg1") != -1 || StrContains(weapon, "scar20") != -1))) && (GetEntProp(attacker, Prop_Data, "m_iFOV") <= 0 || GetEntProp(attacker, Prop_Data, "m_iFOV") == GetEntProp(attacker, Prop_Data, "m_iDefaultFOV")))
+		if( attacker < MAXPLAYERS && ((StrContains(weapon, "awp") != -1 || StrContains(weapon, "ssg08") != -1) || StrContains(weapon, "scout") != -1 || (g_bNSAllSnipers && (StrContains(weapon, "g3sg1") != -1 || StrContains(weapon, "scar20") != -1) || StrContains(weapon, "sg550"))) && (GetEntProp(attacker, Prop_Data, "m_iFOV") <= 0 || GetEntProp(attacker, Prop_Data, "m_iFOV") == GetEntProp(attacker, Prop_Data, "m_iDefaultFOV")))
 		{
 			g_aStats[attacker].SCORE+= g_PointsNS;
 			g_aSession[attacker].SCORE+= g_PointsNS;
@@ -1394,9 +1387,9 @@ public void SalvarPlayer(int client) {
 	//ReplaceString(name, sizeof(name), "'", "");
 	
 	char weapons_query[2000] = "";
-	int weapon_array[48];
+	int weapon_array[51];
 	g_aWeapons[client].GetData(weapon_array);
-	for (int i = 0; i < 48; i++) {
+	for (int i = 0; i < 51; i++) {
 		Format(weapons_query, sizeof(weapons_query), "%s,%s='%d'", weapons_query, g_sWeaponsNamesGame[i], weapon_array[i]);
 	}
 	
@@ -1587,85 +1580,91 @@ public void SQL_LoadPlayerCallback(Handle owner, Handle hndl, const char[] error
 		g_aWeapons[client].KNIFE = SQL_FetchInt(hndl, 17);
 		g_aWeapons[client].GLOCK = SQL_FetchInt(hndl, 18);
 		g_aWeapons[client].HKP2000 = SQL_FetchInt(hndl, 19);
-		g_aWeapons[client].USP = SQL_FetchInt(hndl, 20);
+		g_aWeapons[client].USP_SILENCER = SQL_FetchInt(hndl, 20);
 		g_aWeapons[client].P250 = SQL_FetchInt(hndl, 21);
-		g_aWeapons[client].P228 = SQL_FetchInt(hndl, 22);
-		g_aWeapons[client].DEAGLE = SQL_FetchInt(hndl, 23);
-		g_aWeapons[client].ELITE = SQL_FetchInt(hndl, 24);
-		g_aWeapons[client].FIVESEVEN = SQL_FetchInt(hndl, 25);
-		g_aWeapons[client].TEC9 = SQL_FetchInt(hndl, 26);
-		g_aWeapons[client].CZ75A = SQL_FetchInt(hndl, 27);
-		g_aWeapons[client].REVOLVER = SQL_FetchInt(hndl, 28);
-		g_aWeapons[client].M3 = SQL_FetchInt(hndl, 29);
-		g_aWeapons[client].XM1014 = SQL_FetchInt(hndl, 30);
-		g_aWeapons[client].MAG7 = SQL_FetchInt(hndl, 31);
-		g_aWeapons[client].SAWEDOFF = SQL_FetchInt(hndl, 32);
-		g_aWeapons[client].BIZON = SQL_FetchInt(hndl, 33);
-		g_aWeapons[client].TMP = SQL_FetchInt(hndl, 34);
-		g_aWeapons[client].MAC10 = SQL_FetchInt(hndl, 35);
-		g_aWeapons[client].MP9 = SQL_FetchInt(hndl, 36);
-		g_aWeapons[client].MP5NAVY = SQL_FetchInt(hndl, 37);
-		g_aWeapons[client].MP7 = SQL_FetchInt(hndl, 38);
-		g_aWeapons[client].UMP45 = SQL_FetchInt(hndl, 39);
-		g_aWeapons[client].P90 = SQL_FetchInt(hndl, 40);
-		g_aWeapons[client].GALIL = SQL_FetchInt(hndl, 41);
-		g_aWeapons[client].AK47 = SQL_FetchInt(hndl, 42);
-		g_aWeapons[client].SCAR20 = SQL_FetchInt(hndl, 43);
-		g_aWeapons[client].SCOUT = SQL_FetchInt(hndl, 44);
-		g_aWeapons[client].SG552 = SQL_FetchInt(hndl, 45);
-		g_aWeapons[client].FAMAS = SQL_FetchInt(hndl, 46);
-		g_aWeapons[client].M4A1 = SQL_FetchInt(hndl, 47);
-		g_aWeapons[client].M4A1_SILENCER = SQL_FetchInt(hndl, 48);
-		g_aWeapons[client].AUG = SQL_FetchInt(hndl, 49);
-		g_aWeapons[client].SSG08 = SQL_FetchInt(hndl, 50);
-		g_aWeapons[client].SG556 = SQL_FetchInt(hndl, 51);
-		g_aWeapons[client].SG550 = SQL_FetchInt(hndl, 52);
-		g_aWeapons[client].AWP = SQL_FetchInt(hndl, 53);
-		g_aWeapons[client].G3SG1 = SQL_FetchInt(hndl, 54);
-		g_aWeapons[client].M249 = SQL_FetchInt(hndl, 55);
-		g_aWeapons[client].NEGEV = SQL_FetchInt(hndl, 56);
-		g_aWeapons[client].HEGRENADE = SQL_FetchInt(hndl, 57);
-		g_aWeapons[client].FLASHBANG = SQL_FetchInt(hndl, 58);
-		g_aWeapons[client].SMOKEGRENADE = SQL_FetchInt(hndl, 59);
-		g_aWeapons[client].INFERNO = SQL_FetchInt(hndl, 60);
-		g_aWeapons[client].DECOY = SQL_FetchInt(hndl, 61);
-		g_aWeapons[client].TASER = SQL_FetchInt(hndl, 62);
-		g_aWeapons[client].MP5SD = SQL_FetchInt(hndl, 63);
-		g_aWeapons[client].BREACHCHARGE = SQL_FetchInt(hndl, 64);
+		g_aWeapons[client].DEAGLE = SQL_FetchInt(hndl, 22);
+		g_aWeapons[client].ELITE = SQL_FetchInt(hndl, 23);
+		g_aWeapons[client].FIVESEVEN = SQL_FetchInt(hndl, 24);
+		g_aWeapons[client].TEC9 = SQL_FetchInt(hndl, 25);
+		g_aWeapons[client].CZ75A = SQL_FetchInt(hndl, 26);
+		g_aWeapons[client].REVOLVER = SQL_FetchInt(hndl, 27);
+		g_aWeapons[client].NOVA = SQL_FetchInt(hndl, 28);
+		g_aWeapons[client].XM1014 = SQL_FetchInt(hndl, 29);
+		g_aWeapons[client].MAG7 = SQL_FetchInt(hndl, 30);
+		g_aWeapons[client].SAWEDOFF = SQL_FetchInt(hndl, 31);
+		g_aWeapons[client].BIZON = SQL_FetchInt(hndl, 32);
+		g_aWeapons[client].MAC10 = SQL_FetchInt(hndl, 33);
+		g_aWeapons[client].MP9 = SQL_FetchInt(hndl, 34);
+		g_aWeapons[client].MP7 = SQL_FetchInt(hndl, 35);
+		g_aWeapons[client].UMP45 = SQL_FetchInt(hndl, 36);
+		g_aWeapons[client].P90 = SQL_FetchInt(hndl, 37);
+		g_aWeapons[client].GALILAR = SQL_FetchInt(hndl, 38);
+		g_aWeapons[client].AK47 = SQL_FetchInt(hndl, 39);
+		g_aWeapons[client].SCAR20 = SQL_FetchInt(hndl, 40);
+		g_aWeapons[client].FAMAS = SQL_FetchInt(hndl, 41);
+		g_aWeapons[client].M4A1 = SQL_FetchInt(hndl, 42);
+		g_aWeapons[client].M4A1_SILENCER = SQL_FetchInt(hndl, 43);
+		g_aWeapons[client].AUG = SQL_FetchInt(hndl, 44);
+		g_aWeapons[client].SSG08 = SQL_FetchInt(hndl, 45);
+		g_aWeapons[client].SG556 = SQL_FetchInt(hndl, 46);
+		g_aWeapons[client].AWP = SQL_FetchInt(hndl, 47);
+		g_aWeapons[client].G3SG1 = SQL_FetchInt(hndl, 48);
+		g_aWeapons[client].M249 = SQL_FetchInt(hndl, 49);
+		g_aWeapons[client].NEGEV = SQL_FetchInt(hndl, 50);
+		g_aWeapons[client].HEGRENADE = SQL_FetchInt(hndl, 51);
+		g_aWeapons[client].FLASHBANG = SQL_FetchInt(hndl, 52);
+		g_aWeapons[client].SMOKEGRENADE = SQL_FetchInt(hndl, 53);
+		g_aWeapons[client].INFERNO = SQL_FetchInt(hndl, 54);
+		g_aWeapons[client].DECOY = SQL_FetchInt(hndl, 55);
+		g_aWeapons[client].TASER = SQL_FetchInt(hndl, 56);
+		g_aWeapons[client].MP5SD = SQL_FetchInt(hndl, 57);
+		g_aWeapons[client].BREACHCHARGE = SQL_FetchInt(hndl, 58);
+		
+		// CS:S
+		g_aWeapons[client].M3 = SQL_FetchInt(hndl, 59);
+		g_aWeapons[client].USP = SQL_FetchInt(hndl, 60);
+		g_aWeapons[client].P228 = SQL_FetchInt(hndl, 61);
+		g_aWeapons[client].GALIL = SQL_FetchInt(hndl, 62);
+		g_aWeapons[client].SCOUT = SQL_FetchInt(hndl, 63);
+		g_aWeapons[client].SG552 = SQL_FetchInt(hndl, 64);
+		g_aWeapons[client].SG550 = SQL_FetchInt(hndl, 65);
+		g_aWeapons[client].MP5NAVY = SQL_FetchInt(hndl, 66);
+		g_aWeapons[client].TMP = SQL_FetchInt(hndl, 67);
 		
 		//ALL 8 Hitboxes
-		g_aHitBox[client].HEAD = SQL_FetchInt(hndl, 65);
-		g_aHitBox[client].CHEST = SQL_FetchInt(hndl, 66);
-		g_aHitBox[client].STOMACH = SQL_FetchInt(hndl, 67);
-		g_aHitBox[client].LEFT_ARM = SQL_FetchInt(hndl, 68);
-		g_aHitBox[client].RIGHT_ARM = SQL_FetchInt(hndl, 69);
-		g_aHitBox[client].LEFT_LEG = SQL_FetchInt(hndl, 70);
-		g_aHitBox[client].RIGHT_LEG = SQL_FetchInt(hndl, 71);
+		g_aHitBox[client].HEAD = SQL_FetchInt(hndl, 68);
+		g_aHitBox[client].CHEST = SQL_FetchInt(hndl, 69);
+		g_aHitBox[client].STOMACH = SQL_FetchInt(hndl, 70);
+		g_aHitBox[client].LEFT_ARM = SQL_FetchInt(hndl, 71);
+		g_aHitBox[client].RIGHT_ARM = SQL_FetchInt(hndl, 72);
+		g_aHitBox[client].LEFT_LEG = SQL_FetchInt(hndl, 73);
+		g_aHitBox[client].RIGHT_LEG = SQL_FetchInt(hndl, 74);
 		
 		// other stats
-		g_aStats[client].C4_PLANTED = SQL_FetchInt(hndl, 72);
-		g_aStats[client].C4_EXPLODED = SQL_FetchInt(hndl, 73);
-		g_aStats[client].C4_DEFUSED = SQL_FetchInt(hndl, 74);
-		g_aStats[client].CT_WIN = SQL_FetchInt(hndl, 75);
-		g_aStats[client].TR_WIN = SQL_FetchInt(hndl, 76);
-		g_aStats[client].HOSTAGES_RESCUED = SQL_FetchInt(hndl, 77);
-		g_aStats[client].VIP_KILLED = SQL_FetchInt(hndl, 78);
-		g_aStats[client].VIP_ESCAPED = SQL_FetchInt(hndl, 79);
-		g_aStats[client].VIP_PLAYED = SQL_FetchInt(hndl, 80);
-		g_aStats[client].MVP = SQL_FetchInt(hndl, 81);
-		g_aStats[client].DAMAGE = SQL_FetchInt(hndl, 82);
-		g_aStats[client].MATCH_WIN = SQL_FetchInt(hndl, 83);
-		g_aStats[client].MATCH_DRAW = SQL_FetchInt(hndl, 84);
-		g_aStats[client].MATCH_LOSE = SQL_FetchInt(hndl, 85);
-		g_aStats[client].FB = SQL_FetchInt(hndl, 86);
-		g_aStats[client].NS = SQL_FetchInt(hndl, 87);
-		g_aStats[client].NSD = SQL_FetchInt(hndl, 88);
-		g_aStats[client].SMOKE = SQL_FetchInt(hndl, 89);
-		g_aStats[client].BLIND = SQL_FetchInt(hndl, 90);
-		g_aStats[client].AF = SQL_FetchInt(hndl, 91);
-		g_aStats[client].ATF = SQL_FetchInt(hndl, 92);
-		g_aStats[client].ATK = SQL_FetchInt(hndl, 93);
-		g_aStats[client].WALL = SQL_FetchInt(hndl, 94);
+		g_aStats[client].C4_PLANTED = SQL_FetchInt(hndl, 75);
+		g_aStats[client].C4_EXPLODED = SQL_FetchInt(hndl, 76);
+		g_aStats[client].C4_DEFUSED = SQL_FetchInt(hndl, 77);
+		g_aStats[client].CT_WIN = SQL_FetchInt(hndl, 78);
+		g_aStats[client].TR_WIN = SQL_FetchInt(hndl, 79);
+		g_aStats[client].HOSTAGES_RESCUED = SQL_FetchInt(hndl, 80);
+		g_aStats[client].VIP_KILLED = SQL_FetchInt(hndl, 81);
+		g_aStats[client].VIP_ESCAPED = SQL_FetchInt(hndl, 82);
+		g_aStats[client].VIP_PLAYED = SQL_FetchInt(hndl, 83);
+		g_aStats[client].MVP = SQL_FetchInt(hndl, 84);
+		g_aStats[client].DAMAGE = SQL_FetchInt(hndl, 85);
+		g_aStats[client].MATCH_WIN = SQL_FetchInt(hndl, 86);
+		g_aStats[client].MATCH_DRAW = SQL_FetchInt(hndl, 87);
+		g_aStats[client].MATCH_LOSE = SQL_FetchInt(hndl, 88);
+		g_aStats[client].FB = SQL_FetchInt(hndl, 89);
+		g_aStats[client].NS = SQL_FetchInt(hndl, 90);
+		g_aStats[client].NSD = SQL_FetchInt(hndl, 91);
+		g_aStats[client].SMOKE = SQL_FetchInt(hndl, 92);
+		g_aStats[client].BLIND = SQL_FetchInt(hndl, 93);
+		g_aStats[client].AF = SQL_FetchInt(hndl, 94);
+		g_aStats[client].ATF = SQL_FetchInt(hndl, 95);
+		g_aStats[client].ATK = SQL_FetchInt(hndl, 96);
+		g_aStats[client].WALL = SQL_FetchInt(hndl, 97);
+		//LogMessage("Number of fields in result: %d", SQL_HasResultSet(hndl));
 	} else {
 		char query[10000];
 		char sEscapeName[MAX_NAME_LENGTH * 2 + 1];
